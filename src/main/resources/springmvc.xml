@@ -18,4 +18,11 @@
     <!--配置springmvc注解驱动，自动注册合适的组件handlerMapping和handlerAdapter-->
     <mvc:annotation-driven/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/account/**"/>
+            <mvc:exclude-mapping path="/account/login"/>
+            <bean class="com.lagou.edu.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

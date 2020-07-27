@@ -1,12 +1,13 @@
 package com.lagou.edu.controller;
 
-import com.lagou.edu.pojo.Account;
-import com.lagou.edu.service.AccountService;
+import com.lagou.edu.dao.AccountDao;
+import com.lagou.edu.domain.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -21,12 +22,21 @@ public class AccountController {
 
 
     @Autowired
-    private AccountService accountService;
+    private AccountDao accountDao;
 
     @RequestMapping("/queryAll")
     @ResponseBody
-    public List<Account>  queryAll() throws Exception {
-        return accountService.queryAccountList();
+    public List<Account> queryAll() throws Exception {
+        return accountDao.getAll();
+    }
+
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request, String username, String password) {
+        if (accountDao.queryPasswordByUsername(username, password)) {
+            request.getSession().setAttribute("login", username);
+            return "index.jsp";
+        }
+        return null;
     }
 
 }
