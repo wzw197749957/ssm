@@ -15,5 +15,5 @@ public interface AccountDao {
 
     public void update(Object entity);
 
-    public void delete(Object entity);
+    public void delete(String cardNo);
 }

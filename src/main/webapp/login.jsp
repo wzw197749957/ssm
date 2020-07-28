@@ -15,7 +15,7 @@
 </body>
 <center>
     <h2>用户登录</h2>
-    <form action="/ssm/account/login" method="post">
+    <form action="/login" method="post">
         <table>
             <tr>
                 <td>用户名：</td>

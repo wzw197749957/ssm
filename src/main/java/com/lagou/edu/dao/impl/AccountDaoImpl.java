@@ -75,12 +75,18 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public void delete(Object entity) {
+    public void delete(String cardNo) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.remove(entity);
-        transaction.commit();
-        entityManager.close();
+        Query query = entityManager.createQuery("select a from Account a where a.cardNo=?1");
+        query.setParameter(1, cardNo);
+        try {
+            Account account = (Account) query.getSingleResult();
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
+            entityManager.remove(account);
+            transaction.commit();
+        } finally {
+            entityManager.close();
+        }
     }
 }

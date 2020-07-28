@@ -20,8 +20,8 @@
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/account/**"/>
-            <mvc:exclude-mapping path="/account/login"/>
+            <mvc:mapping path="/queryAll"/>
+            <mvc:exclude-mapping path="/login"/>
             <bean class="com.lagou.edu.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
